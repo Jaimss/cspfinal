@@ -6,7 +6,7 @@ export default (req: NextApiRequest, res: NextApiResponse<Array<CountdownProps>>
         res.status(200)
     } else if (req.method == 'GET') {
         res.status(200).json([{
-            name: "This is the cooldown.",
+            name: "This is the countdown.",
             year: 2020,
             month: 12,
             day: 31,

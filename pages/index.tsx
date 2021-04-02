@@ -30,27 +30,41 @@ export default function Home({ data }): JSX.Element {
           console.log("clicked")
 
           const name = (document.getElementById("name") as HTMLInputElement).value
-          const date = (document.getElementById("date") as HTMLInputElement).value
+          const dateStr = (document.getElementById("date") as HTMLInputElement).value
 
-          if (name == "" || date == "") {
+          if (name == "" || dateStr == "") {
             alert("Please fill out the form fields completely!")
             return
           }
 
-          countdowns.push({
+          const date = new Date(dateStr)
+
+
+
+          const countdownTemp = {
             name: name,
-            year: 2020,
-            day: 2020,
-            month: 2002,
-            minute: 3,
-            hour: 3
-          })
-          setCountdowns(countdowns)
+            year: date.getFullYear(),
+            day: date.getDay(),
+            month: date.getMonth(),
+            minute: date.getMinutes(),
+            hour: date.getHours()
+          }
+          countdowns.push(countdownTemp)
+          sendCountdownAPI(countdownTemp)
+          setCountdowns([...countdowns])
         }} />
       </div>
 
     </div>
   )
+}
+
+export async function sendCountdownAPI(countdown: CountdownProps) {
+  const url = `http://localhost:3000/api/countdowns`
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify([countdown]));
 }
 
 export async function getServerSideProps(context) {
@@ -60,7 +74,7 @@ export async function getServerSideProps(context) {
 
   if (!data) {
     return {
-      props: { new :Array<CountdownProps>() }
+      props: { new: Array<CountdownProps>() }
     }
   }
 
