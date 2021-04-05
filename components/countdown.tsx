@@ -1,13 +1,13 @@
 import { CountdownProps } from "../types/CountdownProps";
 
-export default function Countdown({ name, year, month, day }: CountdownProps): JSX.Element {
+export default function Countdown({ name, year, month, day, hour, minute }: CountdownProps): JSX.Element {
     return (
         <>
             <div className="center">
                 <p className="countdownname">{name}</p>
             </div>
             <div className="center">
-                <p className="countdowndate">{year}-{month}-{day}</p>
+                <p className="countdowndate">{month}/{day}/{year} {hour}:{minute}</p>
             </div>
         </>
     )

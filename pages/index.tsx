@@ -15,7 +15,7 @@ export default function Home({ data }): JSX.Element {
         <h3 className="dateheader">Expiration Date</h3>
       </div>
       {countdowns.map((cooldown: CountdownProps) => {
-        return <Countdown key={cooldown.name} name={cooldown.name} year={cooldown.year} month={cooldown.month} day={cooldown.day} hour={cooldown.hour} minute={cooldown.minute} second={cooldown.second} />
+        return <Countdown key={cooldown.name} name={cooldown.name} year={cooldown.year} month={cooldown.month} day={cooldown.day} hour={cooldown.hour} minute={cooldown.minute} />
       })}
 
       <div className="center">
@@ -37,20 +37,26 @@ export default function Home({ data }): JSX.Element {
             return
           }
 
+          console.log(dateStr)
           const date = new Date(dateStr)
 
-
+          var min;
+          if (date.getMinutes() == 0) {
+            min = "00"
+          } else {
+            min = date.getMinutes()
+          }
 
           const countdownTemp = {
             name: name,
             year: date.getFullYear(),
-            day: date.getDay(),
-            month: date.getMonth(),
-            minute: date.getMinutes(),
+            day: date.getDate(),
+            month: date.getMonth() + 1,
+            minute: min,
             hour: date.getHours()
           }
           countdowns.push(countdownTemp)
-          sendCountdownAPI(countdownTemp)
+          sendCountdownAPI([...countdowns])
           setCountdowns([...countdowns])
         }} />
       </div>
@@ -59,12 +65,12 @@ export default function Home({ data }): JSX.Element {
   )
 }
 
-export async function sendCountdownAPI(countdown: CountdownProps) {
+export async function sendCountdownAPI(countdown: Array<CountdownProps>) {
   const url = `http://localhost:3000/api/countdowns`
   var xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify([countdown]));
+  xhr.send(JSON.stringify(countdown));
 }
 
 export async function getServerSideProps(context) {
