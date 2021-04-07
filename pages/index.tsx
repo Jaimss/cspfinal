@@ -9,13 +9,17 @@ export default function Home({ data }): JSX.Element {
   return (
     <div className="page-container">
       <div className="center">
-        <h3 className="nameheader">Countdown Name</h3>
+        <h3 className="nameheader">Event Name</h3>
       </div>
       <div className="center">
-        <h3 className="dateheader">Expiration Date</h3>
+        <h3 className="dateheader">Event Date</h3>
       </div>
       {countdowns.map((cooldown: CountdownProps) => {
-        return <Countdown key={cooldown.name} name={cooldown.name} year={cooldown.year} month={cooldown.month} day={cooldown.day} hour={cooldown.hour} minute={cooldown.minute} />
+        return <Countdown key={cooldown.name} name={cooldown.name} year={cooldown.year} month={cooldown.month} day={cooldown.day} hour={cooldown.hour} minute={cooldown.minute} onClick={()=> {
+          countdowns.splice(countdowns.indexOf(cooldown), 1)
+          setCountdowns([...countdowns])
+          sendCountdownAPI([...countdowns])
+        }}/>
       })}
 
       <div className="center">
@@ -27,8 +31,6 @@ export default function Home({ data }): JSX.Element {
       <div className="center submit-container">
         <input type="submit" value="Submit" id="submit" onClick={() => {
 
-          console.log("clicked")
-
           const name = (document.getElementById("name") as HTMLInputElement).value
           const dateStr = (document.getElementById("date") as HTMLInputElement).value
 
@@ -37,7 +39,11 @@ export default function Home({ data }): JSX.Element {
             return
           }
 
-          console.log(dateStr)
+          if (countdowns.some((item) => item.name === name)) {
+            alert("Please use a different Name!")
+            return
+          }
+
           const date = new Date(dateStr)
 
           var min;
