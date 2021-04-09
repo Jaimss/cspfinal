@@ -12,6 +12,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 1.35em;
 }
 
 p {
@@ -21,9 +22,9 @@ p {
 
 h3 {
   color: var(--color-blacktext);
-  background-color: aqua;
+  background-color: #409cf3;
   border-radius: 10px;
-  width: 75%;
+  width: 50%;
   grid-row: 1;
   text-align: center;
   margin-bottom: 5px;
@@ -48,6 +49,7 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
+  margin-top: 50px;
 }
 
 .nameheader {
@@ -71,11 +73,16 @@ a {
 .submit-container {
   grid-column: span 2;
 }
+input {
+  font-size: .7em;
+  border-radius: 10px;
+}
 #submit {
+  font-size: .7em;
   border-radius: 10px;
   width: 15%;
   height: 115%;
-  background-color: #00FF2E;
+  background-color: #409cf3;
   color: var(--color-blacktext);
   border: none;
   outline: none;
@@ -94,4 +101,15 @@ a {
 
 #delete {
   margin-right: 5%;
+  font-size: .7em;
+  border-radius: 10px;
+}
+.nameRow, .dateRow {
+  background: #242424;
+  padding: 5px;
+  border-radius: 10px;
+}
+.nameRow:hover {
+  cursor: pointer;
+  color: red;
 }

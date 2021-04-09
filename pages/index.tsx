@@ -12,7 +12,7 @@ export default function Home({ data }): JSX.Element {
         <h3 className="nameheader">Event Name</h3>
       </div>
       <div className="center">
-        <h3 className="dateheader">Event Date</h3>
+        <h3 className="dateheader">Event Date (24 HR)</h3>
       </div>
       {countdowns.map((cooldown: CountdownProps) => {
         return <Countdown key={cooldown.name} name={cooldown.name} year={cooldown.year} month={cooldown.month} day={cooldown.day} hour={cooldown.hour} minute={cooldown.minute} onClick={()=> {
