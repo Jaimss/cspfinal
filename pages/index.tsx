@@ -8,65 +8,64 @@ export default function Home({ data }): JSX.Element {
 
   return (
     <div className="page-container">
-      <div className="center">
-        <h3 className="nameheader">Event Name</h3>
-      </div>
-      <div className="center">
-        <h3 className="dateheader">Event Date (24 HR)</h3>
-      </div>
-      {countdowns.map((cooldown: CountdownProps) => {
-        return <Countdown key={cooldown.name} name={cooldown.name} year={cooldown.year} month={cooldown.month} day={cooldown.day} hour={cooldown.hour} minute={cooldown.minute} onClick={()=> {
-          countdowns.splice(countdowns.indexOf(cooldown), 1)
+      <div id="theme-switcher" onClick={() => {
+        // code to switch theme here
+        const root = document.getElementsByTagName('html')[0]
+        const theme = root.getAttribute("class")
+        if (theme == "light") {
+          root.setAttribute("class", "dark")
+        } else {
+          root.setAttribute("class", "light")
+        }
+      }}>Switch Theme</div>
+      {/*event name & date header*/}
+      <h3 className="name-header">Event Name</h3>
+      <h3 className="date-header">Event Date (24 HR)</h3>
+      {countdowns.map((countdown: CountdownProps) => {
+        return <Countdown key={countdown.name} name={countdown.name} year={countdown.year} month={countdown.month} day={countdown.day} hour={countdown.hour} minute={countdown.minute} onClick={() => {
+          countdowns.splice(countdowns.indexOf(countdown), 1)
           setCountdowns([...countdowns])
           sendCountdownAPI([...countdowns])
-        }}/>
+        }} />
       })}
 
-      <div className="center">
-        <input type="text" name="name" id="name" />
-      </div>
-      <div className="center">
-        <input type="datetime-local" name="date" id="date" />
-      </div>
-      <div className="center submit-container">
-        <input type="submit" value="Submit" id="submit" onClick={() => {
+      <input type="text" name="name" id="name" />
+      <input type="datetime-local" name="date" id="date" />
+      <input type="submit" value="Submit" id="submit" onClick={() => {
+        const name = (document.getElementById("name") as HTMLInputElement).value
+        const dateStr = (document.getElementById("date") as HTMLInputElement).value
 
-          const name = (document.getElementById("name") as HTMLInputElement).value
-          const dateStr = (document.getElementById("date") as HTMLInputElement).value
+        if (name == "" || dateStr == "") {
+          alert("Please fill out the form fields completely!")
+          return
+        }
 
-          if (name == "" || dateStr == "") {
-            alert("Please fill out the form fields completely!")
-            return
-          }
+        if (countdowns.some((item) => item.name === name)) {
+          alert("Please use a different Name!")
+          return
+        }
 
-          if (countdowns.some((item) => item.name === name)) {
-            alert("Please use a different Name!")
-            return
-          }
+        const date = new Date(dateStr)
 
-          const date = new Date(dateStr)
+        var min;
+        if (date.getMinutes() == 0) {
+          min = "00"
+        } else {
+          min = date.getMinutes()
+        }
 
-          var min;
-          if (date.getMinutes() == 0) {
-            min = "00"
-          } else {
-            min = date.getMinutes()
-          }
-
-          const countdownTemp = {
-            name: name,
-            year: date.getFullYear(),
-            day: date.getDate(),
-            month: date.getMonth() + 1,
-            minute: min,
-            hour: date.getHours()
-          }
-          countdowns.push(countdownTemp)
-          sendCountdownAPI([...countdowns])
-          setCountdowns([...countdowns])
-        }} />
-      </div>
-
+        const countdownTemp = {
+          name: name,
+          year: date.getFullYear(),
+          day: date.getDate(),
+          month: date.getMonth() + 1,
+          minute: min,
+          hour: date.getHours()
+        }
+        countdowns.push(countdownTemp)
+        sendCountdownAPI([...countdowns])
+        setCountdowns([...countdowns])
+      }} />
     </div>
   )
 }

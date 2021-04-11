@@ -1,7 +1,37 @@
-:root {
+* {
+  transition: color 1s ease;
+  transition: background-color 1s ease;
+}
+
+html {
   --color-bg: #121212;
-  --color-blacktext: #000000;
+  --color-darktext: #000000;
   --color-text: #ffffff;
+  --color-primary: #35e9ff;
+  --color-button: #35ffae;
+  --color-red: #f03f34;
+}
+
+html.light {
+  --color-bg: #ffffff;
+  --color-darktext: #000000;
+  --color-text: #121212;
+  --color-primary: #35e9ff;
+  --color-button: #35ffae;
+  --color-red: #f03f34;
+}
+
+#theme-switcher {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  background-color: var(--color-button);
+  color: var(--color-darktext);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: .7em;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 html,
@@ -19,10 +49,29 @@ p {
   margin-top: 0;
   margin-bottom: 1px;
 }
+* {
+  box-sizing: border-box;
+}
 
-h3 {
-  color: var(--color-blacktext);
-  background-color: #409cf3;
+/* page container style */
+.page-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: 50px;
+}
+
+/* header styling */
+.name-header {
+  grid-column: 1;
+}
+.date-header {
+  grid-column: 2;
+}
+.name-header, .date-header {
+  color: var(--color-darktext);
+  background-color: var(--color-primary);
   border-radius: 10px;
   width: 50%;
   grid-row: 1;
@@ -30,86 +79,53 @@ h3 {
   margin-bottom: 5px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.center {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.page-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  margin-top: 50px;
-}
-
-.nameheader {
-  grid-column: 1;
-}
-
-.dateheader {
-  grid-column: 2;
-}
-
+/* Date/name styling */
 .countdown-name {
   grid-column: 1;
   text-align: center;
 }
-
 .countdown-date {
   grid-column: 2;
   text-align: center;
 }
-
-.submit-container {
-  grid-column: span 2;
+.countdown-date, .countdown-name {
+  background: lighten(var(--color-bg), 25%);
+  padding: 5px;
+  border-radius: 10px;
 }
+.countdown-name:hover {
+  cursor: pointer;
+  color: var(--color-red);
+}
+
+/* Buttons */
 input {
   font-size: .7em;
   border-radius: 10px;
 }
 #submit {
+  grid-column: span 2;
   font-size: .7em;
   border-radius: 10px;
   width: 15%;
   height: 115%;
-  background-color: #409cf3;
-  color: var(--color-blacktext);
+  background-color: var(--color-button);
+  color: var(--color-darktext);
+  font-weight: bold;
   border: none;
   outline: none;
 }
 #submit:hover {
   cursor: pointer;
 }
-
 #date {
   width: 35%;
 }
-
 #name {
   width: 35%;
 }
-
 #delete {
   margin-right: 5%;
   font-size: .7em;
   border-radius: 10px;
-}
-.nameRow, .dateRow {
-  background: #242424;
-  padding: 5px;
-  border-radius: 10px;
-}
-.nameRow:hover {
-  cursor: pointer;
-  color: red;
 }
