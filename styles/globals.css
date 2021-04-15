@@ -129,3 +129,7 @@ input {
   font-size: .7em;
   border-radius: 10px;
 }
+.dadjoke {
+  margin-top: 40px;
+  grid-column: 1 / span 2;
+}

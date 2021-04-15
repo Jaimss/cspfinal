@@ -1,10 +1,13 @@
 import Countdown from '../components/countdown';
 import { CountdownProps } from '../types/CountdownProps';
+import dadjoke from "@mikemcbride/dad-jokes"
+
 import { useState } from 'react'
 
 export default function Home({ data }): JSX.Element {
 
   const [countdowns, setCountdowns] = useState<Array<CountdownProps>>(data)
+  const [joke, setJoke] = useState(dadjoke.random())
 
   return (
     <div className="page-container">
@@ -17,6 +20,7 @@ export default function Home({ data }): JSX.Element {
         } else {
           root.setAttribute("class", "light")
         }
+        setJoke(dadjoke.random())
       }}>Switch Theme</div>
       {/*event name & date header*/}
       <h3 className="name-header">Event Name</h3>
@@ -26,6 +30,7 @@ export default function Home({ data }): JSX.Element {
           countdowns.splice(countdowns.indexOf(countdown), 1)
           setCountdowns([...countdowns])
           sendCountdownAPI([...countdowns])
+          setJoke(dadjoke.random())
         }} />
       })}
 
@@ -50,6 +55,8 @@ export default function Home({ data }): JSX.Element {
         var min;
         if (date.getMinutes() == 0) {
           min = "00"
+        } else if (date.getMinutes() >= 1 && date.getMinutes() <= 9) {
+          min = "0" + date.getMinutes().toString()
         } else {
           min = date.getMinutes()
         }
@@ -65,7 +72,9 @@ export default function Home({ data }): JSX.Element {
         countdowns.push(countdownTemp)
         sendCountdownAPI([...countdowns])
         setCountdowns([...countdowns])
+        setJoke(dadjoke.random())
       }} />
+      <p className="dadjoke">{joke}</p>
     </div>
   )
 }
