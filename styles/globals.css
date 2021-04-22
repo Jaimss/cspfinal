@@ -7,8 +7,8 @@ html {
   --color-bg: #121212;
   --color-darktext: #000000;
   --color-text: #ffffff;
-  --color-primary: #35e9ff;
-  --color-button: #35ffae;
+  --color-primary: #BF1140;
+  --color-button: #D93F07 ;
   --color-red: #f03f34;
 }
 
@@ -16,8 +16,8 @@ html.light {
   --color-bg: #ffffff;
   --color-darktext: #000000;
   --color-text: #121212;
-  --color-primary: #35e9ff;
-  --color-button: #35ffae;
+  --color-primary: #BF1140;
+  --color-button: #F2A71B;
   --color-red: #f03f34;
 }
 
@@ -107,10 +107,10 @@ input {
 }
 #submit {
   grid-column: span 2;
-  font-size: .7em;
+  font-size: .9em;
   border-radius: 10px;
-  width: 15%;
-  height: 115%;
+  width: 20%;
+  height: 175%;
   background-color: var(--color-button);
   color: var(--color-darktext);
   font-weight: bold;
