@@ -11,15 +11,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).end()
         return
     } else if (req.method == 'GET') {
-        var json;
-        try {
-            json = fs.readFileSync('./data.json', 'utf8', { flag: '' })
-        } catch (err) {
-            if (err.code === 'ENOENT') {
-                json = []
-                fs.writeFile('./data.json', json, {flag: 'wx'})
-            }
-        }
+        var json = json = fs.readFileSync('./data.json', 'utf8', { flag: '' })
         res.status(200).json(json)
         res.end()
         return
