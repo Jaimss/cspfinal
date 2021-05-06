@@ -7,11 +7,19 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     console.log(req.method)
     if (req.method == 'POST') {
         const json = JSON.stringify(req.body)
-        fs.writeFile('./data.json', json, {flag: 'wx'}, () => { })
+        fs.writeFile('./data.json', json, { flag: 'wx' }, () => { })
         res.status(200).end()
         return
     } else if (req.method == 'GET') {
-        const json = fs.readFileSync('./data.json', 'utf8')
+        var json;
+        try {
+            json = fs.readFileSync('./data.json', 'utf8', { flag: '' })
+        } catch (err) {
+            if (err.code === 'ENOENT') {
+                json = []
+                fs.writeFile('./data.json', json, {flag: 'wx'})
+            }
+        }
         res.status(200).json(json)
         res.end()
         return
