@@ -16,7 +16,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
                 fs.writeFileSync('./data.json', [], { flag: 'wx' }, () => { })
             }
         })
-        var json = json = fs.readFileSync('./data.json', 'utf8', { flag: '' })
+        var json = fs.readFileSync('./data.json', 'utf8')
         res.status(200).json(json)
         res.end()
         return
