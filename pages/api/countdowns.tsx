@@ -13,7 +13,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     } else if (req.method == 'GET') {
         fs.exists('./data.json', (exists) => {
             if (!exists) {
-                fs.writeFile('./data.json', [], { flag: 'wx' }, () => { })
+                fs.writeFileSync('./data.json', [], { flag: 'wx' }, () => { })
             }
         })
         var json = json = fs.readFileSync('./data.json', 'utf8', { flag: '' })
