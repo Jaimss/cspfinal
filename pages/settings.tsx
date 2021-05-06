@@ -85,7 +85,7 @@ export default function Settings({ data }): JSX.Element {
 }
 
 export async function sendCountdownAPI(countdown: Array<CountdownProps>) {
-  const url = `http://cspfinal.jaims.dev/api/countdowns`
+  const url = `http://localhost:3000/api/countdowns`
   var xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -93,7 +93,7 @@ export async function sendCountdownAPI(countdown: Array<CountdownProps>) {
 }
 
 export async function getServerSideProps(context) {
-  const url = `http://cspfinal.jaims.dev/api/countdowns`
+  const url = `http://localhost:3000/api/countdowns`
   const res: Response = await fetch(url)
   const data: Array<CountdownProps> = await res.json()
 
