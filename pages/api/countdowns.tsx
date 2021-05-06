@@ -11,6 +11,11 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).end()
         return
     } else if (req.method == 'GET') {
+        fs.exists('./data.json', (exists) => {
+            if (!exists) {
+                fs.writeFile('./data.json', [], { flag: 'wx' }, () => { })
+            }
+        })
         var json = json = fs.readFileSync('./data.json', 'utf8', { flag: '' })
         res.status(200).json(json)
         res.end()
