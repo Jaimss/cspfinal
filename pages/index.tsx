@@ -3,9 +3,12 @@ import { CountdownProps } from '../types/CountdownProps';
 import { useState } from 'react'
 import { formatWithValidation } from 'next/dist/next-server/lib/utils';
 
+import dadjoke from "@mikemcbride/dad-jokes"
+
 export default function Display({ data }): JSX.Element {
 
   const [countdowns, setCountdowns] = useState<Array<CountdownProps>>(data)
+  const [joke, setJoke] = useState(dadjoke.random())
 
   const displays = countdowns.map((countdown: CountdownProps) => {
     var now = new Date()
@@ -43,7 +46,6 @@ export default function Display({ data }): JSX.Element {
     })
     setDisplay(displays)
   }, 1000)
-
 
   return (
     <div className="page-container">

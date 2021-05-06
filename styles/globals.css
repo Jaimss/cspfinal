@@ -163,3 +163,7 @@ input {
 .gray {
   filter: brightness(.75);
 }
+
+.color {
+  color: var(--color-primary)
+}
