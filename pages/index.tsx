@@ -63,7 +63,7 @@ export default function Display({ data }): JSX.Element {
 
 
 export async function getServerSideProps(context) {
-  const url = `http://cspfinal.vercel.app/api/countdowns`
+  const url = `http://cspfinal.jaims.dev/api/countdowns`
   const res: Response = await fetch(url)
   const data: Array<CountdownProps> = await res.json()
 
