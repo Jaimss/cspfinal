@@ -77,5 +77,5 @@ export async function getServerSideProps(context) {
 }
 
 function getDateStr(date) {
-  return `${date.getMonth() + 1}/${date.getDay()}/${date.getFullYear()}`
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 }

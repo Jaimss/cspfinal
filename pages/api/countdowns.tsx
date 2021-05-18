@@ -4,10 +4,10 @@ import { CountdownProps } from "../../types/CountdownProps"
 const fs = require('fs')
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-    console.log(req.method)
+    console.log("Incoming Request: ", req.method)
     if (req.method == 'POST') {
         const json = JSON.stringify(req.body)
-        fs.writeFile('./data.json', json, { flag: 'wx' }, () => { })
+        fs.writeFileSync('./data.json', json, () => { })
         res.status(200).end()
         return
     } else if (req.method == 'GET') {
